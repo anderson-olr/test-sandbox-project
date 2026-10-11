@@ -1,0 +1,21 @@
+name: ci
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      fail:
+        description: Force failure
+        type: boolean
+        default: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build
+        run: |
+          if [ "${{ inputs.fail }}" = "true" ]; then
+            echo "falha sob demanda"; exit 1
+          fi
+          echo "ok"
